@@ -2,6 +2,23 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+//Card Component
+function Card(props)
+{
+  switch(props.name)
+  {
+    case "Heart":
+      return <h2>{props.name}: &hearts;</h2>;
+    case "Diamond":
+      return <h2>{props.name}: &diams;</h2>;    
+    case "Spade":
+      return <h2>{props.name}: &spades;</h2>;
+    case "Club":
+      return <h2>{props.name}: &clubs;</h2>;
+  }
+
+}
+
 class App extends Component {
   constructor() {
     super();
@@ -9,10 +26,14 @@ class App extends Component {
       txt: 'Main Page'
     }
   }
+
+  //Update Event
   update(e)
   {
     this.setHeading({heading: e.target.value})
   }
+
+  //Render the elements
   render() {
     return (
       <div className="App">
@@ -24,12 +45,20 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
           <br/>
           Made with <Heart/>
+          <br/>
+          There are 4 type of cards in the deck:
+          <br/>
+          <Card name="Heart" />
+          <Card name="Diamond" />
+          <Card name="Club" />
+          <Card name="Spade" />
         </p>
       </div>
     );
   }
 }
 
+//Heart Class
 class Heart extends Component {
   render() {
     return(
