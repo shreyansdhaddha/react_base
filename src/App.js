@@ -13,7 +13,7 @@ function Card(props)
       return <h2>{props.name}: &diams;</h2>;    
     case "Spade":
       return <h2>{props.name}: &spades;</h2>;
-    case "Club":
+    default:
       return <h2>{props.name}: &clubs;</h2>;
   }
 
@@ -44,15 +44,18 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
           <br/>
-          Made with <Heart/>
-          <br/>
-          There are 4 type of cards in the deck:
-          <br/>
-          <Card name="Heart" />
-          <Card name="Diamond" />
-          <Card name="Club" />
-          <Card name="Spade" />
         </p>
+        
+        Made with <Heart/>
+        <hr/>
+        There are 4 type of cards in the deck:
+        <br/>
+        <Card name="Heart" />
+        <Card name="Diamond" />
+        <Card name="Club" />
+        <Card name="Spade" />
+        <hr/>
+        <Toggle/>
       </div>
     );
   }
@@ -63,6 +66,29 @@ class Heart extends Component {
   render() {
     return(
         <span>&hearts;</span>
+    );
+  }
+}
+
+//Handling Events
+class Toggle extends Component{
+  constructor(props){
+    super(props);
+    this.state = {isToggleOn: true};
+    this.handleClick = this.handleClick.bind(this); // important to bind
+  }
+
+  handleClick() {
+    this.setState(prevState => ( {
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}> 
+        {this.state.isToggleOn ? 'ON': 'OFF'}
+      </button>
     );
   }
 }
