@@ -72,6 +72,9 @@ class App extends Component {
         <Toggle/>
         <hr/>
         <ListOfItems fruits={fruits} />
+        <hr/>
+        <SubmitForm  />
+
       </div>
     );
   }
@@ -107,6 +110,65 @@ class Toggle extends Component{
       </button>
     );
   }
+}
+
+//Form
+class SubmitForm extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      isApproved: false,
+      randomText: ''
+    };
+    
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+  }
+
+  handleSubmit(event){
+    let isApprovedMessageText = '';
+    if(this.state.isApproved)
+      isApprovedMessageText = ' have accepted ';
+    else
+      isApprovedMessageText = ' have not accepted ';
+
+    alert('You' + isApprovedMessageText + 'the license and your random text is ' + (this.state.randomText.length>0 ? this.state.randomText : '[EMPTY]'))
+    event.preventDefault();
+  }
+  handleTextChange(event){
+    this.setState({randomText: event.target.value.toUpperCase()})
+  }
+  handleCheckboxChange(event){
+    this.setState(prevState => ( {
+      isApproved: !prevState.isApproved
+    }));
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <p>This is a form. Please add your name and random text.</p>
+        <label>
+          <input
+            type="checkbox" checked={this.state.isApproved} onChange={this.handleCheckboxChange}
+          />
+          I accept the license terms.
+        </label>
+        <br/>
+        <label>
+          <div>
+            Please enter a Random Text:
+            <input
+              type="text" value={this.state.randomText} onChange={this.handleTextChange}
+            />
+          </div>
+        </label>
+        <input type='submit' value='Submit' />
+      </form>
+    );
+  }
+
 }
 
 export default App;
