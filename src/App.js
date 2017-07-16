@@ -19,6 +19,20 @@ function Card(props)
 
 }
 
+//List and Keys
+const fruits = ['apple', 'banana', 'mango', 'orange', 'pear', 'grapes'];
+function ListOfItems(props)
+{
+  const items = props.fruits;
+  const listItems = items.map((fruit) => 
+    <li key={fruit.toString()}>{fruit}</li>
+  );
+
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+
 class App extends Component {
   constructor() {
     super();
@@ -56,6 +70,8 @@ class App extends Component {
         <Card name="Spade" />
         <hr/>
         <Toggle/>
+        <hr/>
+        <ListOfItems fruits={fruits} />
       </div>
     );
   }
